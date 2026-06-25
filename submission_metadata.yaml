@@ -1,0 +1,67 @@
+# ============================================================================
+# Team identity
+# ============================================================================
+team_name: "ByteBesties"
+
+primary_contact:
+  name: "Aarti Gore"
+  email: "aartigore2005@gmail.com"   
+  phone: "+91-8830122189"            
+
+team_members:
+  - name: "Aarti Gore"
+    email: "aartigore2005@gmail.com"
+    role: "Data & Scoring Pipeline"
+  - name: "Sumiran Paparkar"
+    email: "sumiranpaparkar@gmail.com" 
+    role: "Infrastructure & Submission"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/sumiran3031/redrob-candidate-ranker"
+
+sandbox_link: "https://huggingface.co/spaces/ByteBesties/redrob-ranker"
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Local laptop — CPU only"   # UPDATE: e.g. "Windows 11 laptop" or "MacBook"
+  cpu_cores: 8                           # UPDATE: check with `nproc` (Linux) or Task Manager
+  ram_gb: 16
+  python_version: "3.11"                 # UPDATE: run `python --version`
+  os: "Windows 11"                       # UPDATE if different
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Two-stage CPU-only ranker. Stage 1 computes a JD-fit base score from five
+  components: TF-IDF cosine similarity to the JD (15%), required skill match
+  weighted by proficiency and duration (30%), role/career fit including explicit
+  penalties for consulting-only backgrounds and unrelated titles (22%), location
+  fit for Pune/Noida preference (8%), and career quality signals including GitHub
+  activity, assessment scores, endorsements, and education tier (17%). Stage 2
+  applies a behavioral availability multiplier derived from last-active recency,
+  open-to-work flag, recruiter response rate, notice period, and interview
+  completion rate. The multiplier is applied as a product (not addition) so a
+  ghost candidate cannot float to the top regardless of skill fit. Honeypots are
+  caught by timeline consistency checks and impossibly high expert-proficiency
+  with zero months of usage. Runtime: ~90 seconds for 100k candidates on CPU.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
