@@ -259,21 +259,12 @@ with col2:
 
 if uploaded:
     with st.spinner("Loading candidates..."):
-        content = uploaded.read().decode("utf-8")
-        # Handle both JSON array and JSONL formats
-content_stripped = content.strip()
-if content_stripped.startswith("["):
-    # It's a JSON array (sample_candidates.json)
-    candidates = json.loads(content_stripped)
-else:
-    # It's JSONL (one candidate per line)
-    content = content.strip()
+        content = uploaded.read().decode("utf-8").strip()
         if content.startswith("["):
             candidates = json.loads(content)
         else:
             lines = [l.strip() for l in content.split("\n") if l.strip()]
             candidates = [json.loads(l) for l in lines]
-    st.success(f"Loaded {len(candidates)} candidates")
 
     if st.button("🚀 Run Ranker", type="primary"):
         with st.spinner(f"Ranking {len(candidates)} candidates... this takes ~10s per 5000 candidates"):
