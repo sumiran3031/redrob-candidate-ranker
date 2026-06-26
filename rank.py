@@ -557,8 +557,8 @@ WEIGHTS = {
     "skill_required": 0.30,  # required skill match
     "skill_bonus":    0.08,  # bonus skills
     "role_fit":       0.22,  # role/career quality
-    "location":       0.08,  # location fit
-    "career_quality": 0.17,  # github, assessments, endorsements, education
+    "location":       0.12,  # location fit
+    "career_quality": 0.13,  # github, assessments, endorsements, education
 }
 
 assert abs(sum(WEIGHTS.values()) - 1.0) < 0.01, "Weights must sum to 1"
