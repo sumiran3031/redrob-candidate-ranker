@@ -267,12 +267,12 @@ if content_stripped.startswith("["):
     candidates = json.loads(content_stripped)
 else:
     # It's JSONL (one candidate per line)
-    content_stripped = content.strip()
-if content_stripped.startswith("["):
-    candidates = json.loads(content_stripped)
-else:
-    lines = [l.strip() for l in content_stripped.split("\n") if l.strip()]
-    candidates = [json.loads(l) for l in lines]
+    content = content.strip()
+        if content.startswith("["):
+            candidates = json.loads(content)
+        else:
+            lines = [l.strip() for l in content.split("\n") if l.strip()]
+            candidates = [json.loads(l) for l in lines]
     st.success(f"Loaded {len(candidates)} candidates")
 
     if st.button("🚀 Run Ranker", type="primary"):
