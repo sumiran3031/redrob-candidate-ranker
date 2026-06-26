@@ -21,7 +21,7 @@ team_members:
 # ============================================================================
 github_repo: "https://github.com/sumiran3031/redrob-candidate-ranker"
 
-sandbox_link: "https://huggingface.co/spaces/ByteBesties/redrob-ranker"
+sandbox_link: "https://redrob-candidate-ranker-cezwpskezjpytwtxngllje.streamlit.app"
 
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
 
